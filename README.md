@@ -1,6 +1,6 @@
 ## yolov5-flask
 
-使用`[yolov5](https://github.com/ultralytics/yolov5)` 的 **v4.0** 版本
+使用 [yolov5](https://github.com/ultralytics/yolov5) 的 **v4.0** 版本
 
 ## 环境
 
