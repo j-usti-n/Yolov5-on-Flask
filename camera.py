@@ -11,7 +11,7 @@ from utils.utils import *
 
 
 class Camera(BaseCamera):
-    video_source = '4.mp4'
+    video_source = 'test.mp4'
 
     def __init__(self):
         if os.environ.get('OPENCV_CAMERA_SOURCE'):
@@ -26,7 +26,8 @@ class Camera(BaseCamera):
     def frames():
         out, weights, imgsz = \
         'inference/output', 'weights/yolov5s.pt', 640
-        source = '4.mp4'
+        source = 'test.mp4'
+        # source = 0
         device = torch_utils.select_device()
         if os.path.exists(out):
             shutil.rmtree(out)  # delete output folder
@@ -46,7 +47,8 @@ class Camera(BaseCamera):
             modelc.to(device).eval()
 
         # Half precision
-        half = False and device.type != 'cpu' 
+        # half = False and device.type != 'cpu'
+        half = True and device.type != 'cpu'
         print('half = ' + str(half))
 
         if half:
@@ -104,6 +106,3 @@ class Camera(BaseCamera):
                 print('%sDone. (%.3fs)' % (s, t2 - t1))
  
             yield cv2.imencode('.jpg', im0)[1].tobytes()
-
-    
-            

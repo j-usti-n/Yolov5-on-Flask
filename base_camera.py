@@ -90,6 +90,7 @@ class BaseCamera(object):
         """Camera background thread."""
         print('Starting camera thread.')
         frames_iterator = cls.frames()
+        print('frames_iterator... {}, type: {}'.format(frames_iterator, type(frames_iterator)))
         for frame in frames_iterator:
             BaseCamera.frame = frame
             BaseCamera.event.set()  # send signal to clients
