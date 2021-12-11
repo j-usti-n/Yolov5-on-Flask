@@ -23,7 +23,7 @@ def detect(save_img=False):
         opt.output,opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size
 
     # webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt')
-    webcam = False
+    webcam = True
 
     # Initialize
     set_logging()
@@ -44,7 +44,7 @@ def detect(save_img=False):
     if classify:
         modelc = load_classifier(name='resnet101', n=2)  # initialize
         modelc.load_state_dict(torch.load('weights/resnet101.pt', map_location=device)['model'])  # load weights
-        modelc.to(device).eval()
+        modelc.to(device).float().eval()
 
     # Set Dataloader
     vid_path, vid_writer = None, None

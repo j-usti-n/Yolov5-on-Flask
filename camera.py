@@ -11,22 +11,16 @@ from utils.utils import *
 
 
 class Camera(BaseCamera):
-    video_source = 'test.mp4'
-
-    def __init__(self):
-        if os.environ.get('OPENCV_CAMERA_SOURCE'):
-            Camera.set_video_source(int(os.environ['OPENCV_CAMERA_SOURCE']))
+    def __init__(self, source):
+        self.video_source = source
+        # if os.environ.get('OPENCV_CAMERA_SOURCE'):
+        #     Camera.set_video_source(int(os.environ['OPENCV_CAMERA_SOURCE']))
         super(Camera, self).__init__()
 
-    @staticmethod
-    def set_video_source(source):
-        Camera.video_source = source
-
-    @staticmethod
-    def frames():
+    def frames(self):
         out, weights, imgsz = \
         'inference/output', 'weights/yolov5s.pt', 640
-        source = 'test.mp4'
+        source =  self.video_source
         # source = 0
         device = torch_utils.select_device()
         if os.path.exists(out):
@@ -37,7 +31,7 @@ class Camera(BaseCamera):
         google_utils.attempt_download(weights)
         model = torch.load(weights, map_location=device)['model']
         
-        model.to(device).eval()
+        model.to(device).float().eval()
 
         # Second-stage classifier
         classify = False

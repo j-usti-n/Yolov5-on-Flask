@@ -85,11 +85,10 @@ class BaseCamera(object):
         """"Generator that returns frames from the camera."""
         raise RuntimeError('Must be implemented by subclasses.')
 
-    @classmethod
-    def _thread(cls):
+    def _thread(self):
         """Camera background thread."""
         print('Starting camera thread.')
-        frames_iterator = cls.frames()
+        frames_iterator = self.frames()
         print('frames_iterator... {}, type: {}'.format(frames_iterator, type(frames_iterator)))
         for frame in frames_iterator:
             BaseCamera.frame = frame
@@ -98,7 +97,7 @@ class BaseCamera(object):
 
             # if there hasn't been any clients asking for frames in
             # the last 10 seconds then stop the thread
-            if time.time() - BaseCamera.last_access > 10:
+            if time.time() - BaseCamera.last_access > 2:
                 frames_iterator.close()
                 print('Stopping camera thread due to inactivity.')
                 break

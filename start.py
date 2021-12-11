@@ -32,7 +32,7 @@ def detect(source):
 	google_utils.attempt_download(weights)
 	model = torch.load(weights, map_location=device)['model']
 	
-	model.to(device).eval()
+	model.to(device).float().eval()
 
 	# Second-stage classifier
 	classify = False
