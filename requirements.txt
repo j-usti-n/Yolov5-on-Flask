@@ -1,8 +1,9 @@
+-f https://download.pytorch.org/whl/torch_stable.html
 opencv-python~=4.4.0.44
 matplotlib~=3.3.3
 numpy~=1.19.2
-torch~=1.6.0
-torchvision~=0.7.0
+torch~=1.6.0+cpu
+torchvision~=0.7.0+cpu
 scipy~=1.5.4
 tqdm~=4.54.1
 pyyaml~=5.3.1
