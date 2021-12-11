@@ -56,6 +56,6 @@ def video_feed(name):
     return Response(gen(cam),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-
+port = int(os.environ.get("PORT", 5001))
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', threaded=True, port=5001)
+    app.run(host='0.0.0.0', threaded=True, port=port)
